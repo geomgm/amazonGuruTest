@@ -1,0 +1,67 @@
+<mvc:View controllerName="app3Descriptor.app3.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panel0">
+							<headerToolbar>
+								<Toolbar id="toolbar1">
+									<Title text="Post message API"/>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://settings"/>
+								</Toolbar>
+							</headerToolbar>
+							<content>
+								<Panel xmlns="sap.m" width="auto" expandable="true" id="panel1">
+									<headerToolbar>
+										<Toolbar id="toolbar2">
+											<Title text="sap.ushell.services.ShellUIService.setTitle"/>
+											<ToolbarSpacer/>
+											<Button icon="sap-icon://settings"/>
+										</Toolbar>
+									</headerToolbar>
+									<content>
+										<Text xmlns="sap.m" text="New title for app window" id="labelNewTitleForAppWindow"/>
+										<Input xmlns="sap.m" id="textNewTitleForApp"/>
+										<Button xmlns="sap.m" text="Send message to cFLP" id="btnSendMessageToChangeTitleToCFLP" press="onPressSendMessageToChangeTitleToCFLP"/>
+									</content>
+								</Panel>
+								<Panel xmlns="sap.m" width="auto" expandable="true" id="panel2">
+									<headerToolbar>
+										<Toolbar id="toolbar3">
+											<Title text="sap.ushell.services.ShellUIService.setDirtyFlag"/>
+											<ToolbarSpacer/>
+											<Button icon="sap-icon://settings"/>
+											<content/>
+										</Toolbar>
+									</headerToolbar>
+									<content>
+										<ToggleButton xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="buttonSetDirtyFlag" text="Press for setting dirty flag"
+											press="onPressButtonSetDirtyFlag"/>
+									</content>
+								</Panel>
+								<Panel xmlns="sap.m" width="auto" expandable="true" id="panel3">
+									<headerToolbar>
+										<Toolbar id="toolbar4">
+											<Title text="sap.ushell.services.ShellUIService.setHierarchy"/>
+											<ToolbarSpacer/>
+											<Button icon="sap-icon://settings"/>
+										</Toolbar>
+									</headerToolbar>
+									<content>
+										<Text xmlns="sap.m" text="First app title" id="labelFirstAppTitle"/>
+										<Input xmlns="sap.m" id="inputFirstAppTitle"/>
+										<Text xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" text="Second app title" id="labelSecondAppTitle"/>
+										<Input xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="inputSecondAppTitle"/>
+										<Button xmlns="sap.m" text="Change hierarchy (app2 will be first)" id="buttonChangeHierarchy" press="onPressChangeHierarchy"/>
+									</content>
+								</Panel>
+							</content>
+						</Panel>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

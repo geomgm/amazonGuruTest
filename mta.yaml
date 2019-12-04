@@ -1,0 +1,122 @@
+ID: navSample
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: navSample_appRouter
+    type: approuter.nodejs
+    path: navSample_appRouter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: navSample_html5_repo_runtime
+      - name: portal_resources_navSample
+      - name: uaa_navSample
+      - name: backendService_api
+        group: destinations
+        properties:
+          name: backendservice-route
+          url: '~{url}'
+          forwardAuthToken: true
+  - name: navSample_ui_deployer
+    type: com.sap.html5.application-content
+    path: navSample_ui_deployer
+    requires:
+      - name: navSample_html5_repo_host
+    build-parameters:
+      requires:
+        - name: app1
+          artifacts:
+            - './*'
+          target-path: resources/app1
+        - name: app2
+          artifacts:
+            - './*'
+          target-path: resources/app2
+        - name: app3
+          artifacts:
+            - './*'
+          target-path: resources/app3
+  - name: app1
+    type: html5
+    path: app1
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: app2
+    type: html5
+    path: app2
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: flp
+    type: com.sap.portal.content
+    path: flp
+    parameters:
+      stack: cflinuxfs3
+      memory: 128M
+      buildpack: 'https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.39/nodejs-buildpack-cflinuxfs3-v1.6.39.zip'
+    requires:
+      - name: portal_resources_navSample
+      - name: uaa_navSample
+      - name: navSample_html5_repo_host
+      - name: navSample_ui_deployer
+  - name: app3
+    type: html5
+    path: app3
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: backendService
+    type: java
+    path: backendService
+    parameters:
+      memory: 1024M
+    provides:
+      - name: backendService_api
+        properties:
+          url: '${default-url}'
+    build-parameters:
+      build-result: 'target/*.jar'
+    requires:
+      - name: uaa_navSample
+resources:
+  - name: navSample_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: navSample_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: uaa_navSample
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_navSample
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: portal_resources_navSample
+    parameters:
+      service-plan: standard
+      service: portal
+    type: org.cloudfoundry.managed-service
+  - name: uaa_navSampleBackend
+    type: com.sap.xs.uaa
+    parameters:
+      service: xsuaa
+      service-plan: broker
+      config:
+         xsappname: backendService
+         tenant-mode: "dedicated"

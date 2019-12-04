@@ -1,0 +1,12 @@
+{
+	"authenticationMethod": "none",
+	"routes": [
+	    {
+          "source": "/BackendService/(.*)$",
+          "target": "/$1",
+          "destination": "backendservice-route",
+          "csrfProtection": false,
+          "authenticationType": "xsuaa"
+        }],
+	"welcomeFile": "/cp.portal"
+}

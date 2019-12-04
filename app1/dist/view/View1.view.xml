@@ -1,0 +1,41 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" controllerName="app1.app1.controller.View1" displayBlock="true">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<VBox width="100%" direction="Column" id="vbox0">
+							<items>
+								<Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panelCrossAppNavigation">
+									<headerToolbar>
+										<Toolbar id="toolbar1_1569859150762">
+											<Title text="Cross app navigation"/>
+											<ToolbarSpacer/>
+											<Button icon="sap-icon://settings"/>
+										</Toolbar>
+									</headerToolbar>
+									<content>
+										<VBox width="100%" direction="Column" id="vbox0_1569859226017">
+											<items>
+												<SegmentedButton xmlns="sap.m" selectedKey="one" id="buttonSegmented">
+													<items>
+														<SegmentedButtonItem text="Button One" key="one" id="item0"/>
+														<SegmentedButtonItem text="Button Two" key="two" id="item1"/>
+														<SegmentedButtonItem text="Button Three" key="three" id="item2"/>
+													</items>
+												</SegmentedButton>
+												<ToggleButton xmlns="sap.m" id="buttonToggle1" text="Press me (cross navigation app state)"/>
+												<Button xmlns="sap.m" text="Navigate to app 3" id="buttonNavigateToApp2" press="onPressNavigateToApp3"/>
+											</items>
+										</VBox>
+									</content>
+								</Panel>
+								<core:ComponentContainer name="app2.app2" />
+							</items>
+						</VBox>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
